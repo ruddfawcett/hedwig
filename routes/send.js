@@ -39,6 +39,12 @@ module.exports = {
 
       var message = request.body.message;
 
+      var metadata_original = request.body.metadata; // we want to strip down bytes here
+      var metadata = {};
+
+      metadata['desc'] = metadata_original.description;
+      metadata['dev'] = metadata_original.device;
+
       if (!message) {
         message = 'Hoot! Your process has finished! Come back!';
       }
@@ -46,7 +52,9 @@ module.exports = {
       Parse.Push.send({
         channels: [base64],
         data: {
-          alert: message
+          badge: 'Increment',
+          alert: message,
+          meta: metadata
         }
       },
       {
