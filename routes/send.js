@@ -4,7 +4,7 @@ var Parse = require('parse').Parse,
 var status = require('../tools/status');
 var keys = require('../secret.json');
 
-Parse.initialize(keys['PARSE_APP_ID'], keys['PARSE_JAVASCRIPT_KEY']);
+Parse.initialize(keys.PARSE_APP_ID, keys.PARSE_JAVASCRIPT_KEY);
 
 module.exports = {
   process: function(request, response) {
@@ -37,10 +37,16 @@ module.exports = {
       var base64 = new Buffer(credentials.email).toString('base64');
       base64 = base64.replace(new RegExp(escapeRegExp('='), 'g'), '');
 
+      var message = request.body.message;
+
+      if (!message) {
+        message = 'Hoot! Your process has finished! Come back!';
+      }
+
       Parse.Push.send({
         channels: [base64],
         data: {
-          alert: 'Hoot! Your process has finished! Come back!'
+          alert: message
         }
       },
       {
