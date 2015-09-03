@@ -1,0 +1,32 @@
+{
+  "name": "hedwig",
+  "version": "0.0.1",
+  "description": "Middleware for Hoot.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "1.13.2",
+    "express": "^4.0.0",
+    "pg": "^4.4.1",
+    "request": "2.58.0"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruddfawcett/hedwig"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "author": "Rudd Fawcett",
+  "contributors": [
+    "Rudd Fawcett <rudd.fawcett@gmail.com> (http://ruddfawcett.com)"
+  ],
+  "license": "MIT"
+}
