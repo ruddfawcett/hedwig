@@ -8,7 +8,7 @@ module.exports = {
     var database_url = keys.DATABASE_URL;
 
     pg.connect(database_url, function(err, client, done) {
-      client.query("SELECT * FROM users WHERE email='"+credentials.email+"';", function(err, result) {
+      client.query("SELECT * FROM users WHERE email=$1;", [credentials.email], function(err, result) {
         if (err) {
           error['error'] = true;
             response.send('error');
@@ -18,7 +18,7 @@ module.exports = {
             response.json({error: 'A user already exists with that email.'})
           }
           else {
-            client.query("INSERT INTO users (email, password) VALUES ('"+credentials.email+"', '"+credentials.password+"') RETURNING id;", function(err, result) {
+            client.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id;", [credentials.email, credentials.password], function(err, result) {
               done();
 
               if (err) {

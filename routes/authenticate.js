@@ -8,7 +8,7 @@ module.exports = {
     var database_url = keys.DATABASE_URL;
 
     pg.connect(database_url, function(err, client, done) {
-      client.query("SELECT * FROM users WHERE email='"+credentials.email+"' AND password='"+credentials.password+"';", function(err, result) {
+      client.query("SELECT * FROM users WHERE email=$1 AND password=$2;", [credentials.email, credentials.password], function(err, result) {
         if (err) {
           response.json({result: false});
         }
